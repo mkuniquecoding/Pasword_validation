@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Password Validate</title>
+	<style type="text/css">
+		body{
+			background: rgb(2,0,36);
+			background-repeat: no-repeat;
+			background-size: cover;
+			height: 100vh;
+			background: linear-gradient(63deg, rgba(2,0,36,1) 0%, rgba(8,8,122,1) 35%, rgba(0,212,255,1) 100%);
+		}
+		#frmCheckPassword{
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%,-50%);
+			height: 400px;
+			width: 400px;
+			background: #fff;
+			border-radius: 20px;
+			padding: 20px;
+		}
+		h1{
+			text-align: center;
+		}
+		#frmCheckPassword input{
+			position: relative;
+			width: 100%;
+			padding: 0 20px;
+			box-sizing: border-box;
+			height: 40px;
+		}
+		#password-strength-status{
+			padding: 20px;
+			color: #fff;
+			margin-top: 10px;
+		}
+		.weak-password{
+			padding: 20px;
+			background-color: red;
+		}
+		.strong-password{
+			padding: 20px;
+			background-color: green;
+		}
+		.medium-password{
+			padding: 20px;
+			background-color: yellow;
+		}
+
+	</style>
+</head>
+<body>
+	<div name="frmCheckPassword" id="frmCheckPassword">
+		<h1>Password Validation</h1>
+        <label>Password:</label>
+        <input type="text" name="password" id="password" class="demoInputBox" onKeyUp="validatePassword();" />
+        <div id="password-strength-status"></div>
+    </div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        function validatePassword() {
+            var number = /([0-9])/;
+            var alphabets = /([a-zA-Z])/;
+            var special_characters = /([~,!,@,#,$,%,^,&,*,-,_,+,=,?,>,<])/;
+
+            if ($('#password').val().length < 6) {
+            	$('#password-strength-status').removeClass();
+            	$('#password-strength-status').addClass('weak-password');
+            	$('#password-strength-status').html('Weak Password');
+            }
+            else{
+
+            	if ($('#password').val().match(number) && $('#password').val().match(alphabets) && $('#password').val().match(special_characters)) {
+            			$('#password-strength-status').removeClass();
+		            	$('#password-strength-status').addClass('strong-password');
+		            	$('#password-strength-status').html('Strong Password');	
+            	}
+            	else{
+            		$('#password-strength-status').removeClass();
+	            	$('#password-strength-status').addClass('medium-password');
+	            	$('#password-strength-status').html('Medium(Should be include number, alphabets and Special Characters');	
+            	}
+            }
+
+        }
+    </script>
+</body>
+</html>
